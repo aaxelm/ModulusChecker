@@ -1,6 +1,10 @@
-﻿using ModulusChecking.Loaders;
+﻿using System.Runtime.CompilerServices;
+using ModulusChecking.Loaders;
 using ModulusChecking.Models;
 using ModulusChecking.Steps;
+
+[assembly: InternalsVisibleTo("ModulusCheckerTests")]
+[assembly: InternalsVisibleTo("DynamicProxyGenAssembly2")]
 
 namespace ModulusChecking
 {
