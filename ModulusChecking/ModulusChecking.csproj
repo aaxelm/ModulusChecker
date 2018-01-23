@@ -1,108 +1,35 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A72763D5-2A3C-425A-A669-7E927E82BC40}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ModulusChecking</RootNamespace>
-    <AssemblyName>ModulusChecker</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <TargetFrameworkProfile />
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
-    <Prefer32Bit>false</Prefer32Bit>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Prefer32Bit>false</Prefer32Bit>
+    <TargetFramework>netstandard1.6</TargetFramework>
+    <PackageId>ModulusChecker.NetCore</PackageId>
+    <Version>1.9.0</Version>
+    <Authors>Paul D'Ambra, Alexandru Munteanu</Authors>
+    <Company>PaulDAmbra</Company>
+    <Product>ModulusChecker</Product>
+    <Description>This is a C# implementation for .NET Core of UK Bank Account Modulus Checking. Modulus Checking is a process used to determine if a given account number could be valid for a given sort code.</Description>
+    <PackageTags>C# NetCore BankAccount ModulusChecking ModulusChecker Modulus Direct Debit UK</PackageTags>
+    <PackageProjectUrl>https://github.com/aaxelm/ModulusChecker.NetCore</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aaxelm/ModulusChecker.NetCore</RepositoryUrl>
+    <RepositoryType>GitHub</RepositoryType>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Include="IProcessAStep.cs" />
-    <Compile Include="Loaders\LoaderExceptions.cs" />
-    <Compile Include="ModulusCheckOutcome.cs" />
-    <Compile Include="LinqExtensions.cs" />
-    <Compile Include="Models\AccountNumber.cs" />
-    <Compile Include="Models\BankAccountDetails.cs" />
-    <Compile Include="Models\ModulusAlgorithm.cs" />
-    <Compile Include="Models\ModulusWeightMapping.cs" />
-    <Compile Include="ModulusChecker.cs" />
-    <Compile Include="Steps\Calculators\BaseModulusCalculator.cs" />
-    <Compile Include="Steps\Calculators\DoubleAlternateCalculatorExceptionFive.cs" />
-    <Compile Include="Steps\Calculators\StandardModulusExceptionFourteenCalculator.cs" />
-    <Compile Include="Steps\ConfirmDetailsAreValid\HasWeightMappings.cs" />
-    <Compile Include="Steps\ConfirmDetailsAreValid\IsUncheckableForeignAccount.cs" />
-    <Compile Include="Steps\FirstStepRouter.cs" />
-    <Compile Include="Steps\Gates\ExceptionFourteenGate.cs" />
-    <Compile Include="Steps\Gates\GatePipeline.cs" />
-    <Compile Include="Steps\Gates\IsExceptionThreeAndCanSkipSecondCheck.cs" />
-    <Compile Include="Steps\Gates\IsExceptionTwoAndFirstCheckPassedGate.cs" />
-    <Compile Include="Steps\Gates\IsSecondCheckRequiredGate.cs" />
-    <Compile Include="Steps\Gates\OnlyOneWeightMappingGate.cs" />
-    <Compile Include="Steps\PostProcessModulusCheckResult.cs" />
-    <Compile Include="Steps\SecondModulusCalculatorStep.cs" />
-    <Compile Include="Steps\Calculators\DoubleAlternateCalculator.cs" />
-    <Compile Include="ModulusChecks\DoubleAlternateModulusCheck.cs" />
-    <Compile Include="ModulusChecks\StandardModulusCheck.cs" />
-    <Compile Include="Loaders\IRuleMappingSource.cs" />
-    <Compile Include="Loaders\ModulusWeightTable.cs" />
-    <Compile Include="Loaders\SortCodeSubstitution.cs" />
-    <Compile Include="Loaders\ValacdosSource.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\SortCode.cs" />
-    <Compile Include="Steps\FirstModulusCalculatorStep.cs" />
-    <Compile Include="Steps\Calculators\FirstStandardModulusElevenCalculator.cs" />
-    <Compile Include="Steps\Calculators\FirstStandardModulusElevenCalculatorExceptionFive.cs" />
-    <Compile Include="Steps\Calculators\FirstStandardModulusTenCalculator.cs" />
-    <Compile Include="Steps\Calculators\SecondStandardModulusElevenCalculator.cs" />
-    <Compile Include="Steps\Calculators\SecondStandardModulusTenCalculator.cs" />
-    <Compile Include="Steps\SecondStepRouter.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+    <None Remove="Resources\valacdos.txt" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\valacdos.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
-    <None Include="Resources\scsubtab.txt" />
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
 </Project>

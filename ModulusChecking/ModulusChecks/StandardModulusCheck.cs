@@ -18,7 +18,7 @@ namespace ModulusChecking.ModulusChecks
             var sum = 0;
             for (var i = 0; i < 14; i++)
             {
-                sum += (int.Parse(combinedValue[i].ToString(CultureInfo.InvariantCulture)) * weightMapping.WeightValues[i]);
+                sum += (int.Parse(combinedValue[i].ToString()) * weightMapping.WeightValues[i]);
             }
             return sum;
         }

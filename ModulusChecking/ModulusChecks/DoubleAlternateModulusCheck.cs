@@ -21,7 +21,7 @@ namespace ModulusChecking.ModulusChecks
             var sum = 0;
             for (var i = 0; i < 14; i++)
             {
-                var multiplicationResult = (int.Parse(combinedValue[i].ToString(CultureInfo.InvariantCulture)) * weightMapping.WeightValues[i]);
+                var multiplicationResult = (int.Parse(combinedValue[i].ToString()) * weightMapping.WeightValues[i]);
                 sum += GetIntArray(multiplicationResult).Sum();
             }
             if (weightMapping.Exception == 1)
@@ -32,8 +32,8 @@ namespace ModulusChecking.ModulusChecks
         }
 
         /// <summary>
-        /// The DoubleAlternate rule adds together the individual digits of the numbers that result from 
-        /// multiplication of sortcode, account number and modulus weighting value. This method takes an 
+        /// The DoubleAlternate rule adds together the individual digits of the numbers that result from
+        /// multiplication of sortcode, account number and modulus weighting value. This method takes an
         /// integer and returns an array of its individual digits
         /// </summary>
         /// <param name="num"></param>
