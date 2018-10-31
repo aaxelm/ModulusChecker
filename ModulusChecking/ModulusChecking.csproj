@@ -2,7 +2,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>ModulusChecker.NetCore</PackageId>
-    <Version>1.9.0</Version>
+    <Version>2.5.0</Version>
     <Authors>Paul D'Ambra, Alexandru Munteanu</Authors>
     <Company>PaulDAmbra</Company>
     <Product>ModulusChecker</Product>
