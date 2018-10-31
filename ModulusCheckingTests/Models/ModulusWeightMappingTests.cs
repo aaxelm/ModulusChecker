@@ -17,20 +17,16 @@ namespace ModulusCheckingTests.Models
         public void CanAddAlgorithm(string row, ModulusAlgorithm expected)
         {
             var actual = ModulusWeightMapping.From(row);
-            Assert.NotNull(actual);
-            Assert.AreEqual(expected,actual.Algorithm);
+            Assert.AreEqual(expected, actual.Algorithm);
         }
 
         [Test]
-        [TestCase("123456 001234 PLOPPY 2 1 2 1 2 1 2 1 2 1 2 1 2 1", ModulusAlgorithm.DblAl)]
-        public void CanAddAlgorithmException(string row, ModulusAlgorithm expected)
+        public void CannotAddUnknownAlgorithm()
         {
             Assert.Throws<ArgumentException>(() =>
-            {
-                var actual = ModulusWeightMapping.From(row);
-            });
+                ModulusWeightMapping.From("123456 001234 PLOPPY 2 1 2 1 2 1 2 1 2 1 2 1 2 1"));
         }
-
+        
         [Test]
         public void CanLoadWeightingValues()
         {

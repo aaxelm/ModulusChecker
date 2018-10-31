@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using ModulusChecking.Models;
-using Moq;
 using NUnit.Framework;
 
 namespace ModulusCheckingTests.Models
@@ -27,34 +26,45 @@ namespace ModulusCheckingTests.Models
         }
 
         [Test]
-        [TestCase("12-34567890", "123456", "123456", "something")]
-        [TestCase("123456123456123456", "123456", "123456", "00123456")]
-        [TestCase("123", "123456", "123456", "00123456")]
-        public void CanInstantiateOddAccountsExceptions(string accountNumber, string sortCode, string expectedSortCode, string expectedAccountNumber)
+        public void CannotInitialiseNonDigitAccountNumber()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                var account = new BankAccountDetails(sortCode, accountNumber);
-            });
+            Assert.Throws<ArgumentException>(() => new BankAccountDetails("000000", "something"));
         }
 
         [Test]
-        [TestCase("123456")]
-        public void CanInitialiseSortCode(string expected)
+        public void CannotIntialiseTooLongAccountNumber()
         {
-            Assert.AreEqual(expected,new BankAccountDetails(expected,"12345678").SortCode.ToString());
+            Assert.Throws<ArgumentException>(() => new BankAccountDetails("000000", "123456123456123456"));
         }
 
         [Test]
-        [TestCase("234", TestName = "short string")]
-        [TestCase("1234567", TestName = "long string")]
-        [TestCase("a", TestName = "not digit string")]
-        public void CanInitialiseSortCodeException(string expected)
+        public void CannotIntialiseTooShortAccountNumber()
         {
-            Assert.Throws<ArgumentException>(() =>
-            {
-                var account = new BankAccountDetails(expected, "12345678").SortCode.ToString();
-            });
+            Assert.Throws<ArgumentException>(() => new BankAccountDetails("000000", "1"));
+        }
+        
+        [Test]
+        public void CanInitialiseSortCode()
+        {
+            Assert.AreEqual("123456",new BankAccountDetails("123456","12345678").SortCode.ToString());
+        }
+        
+        [Test]
+        public void CannotInitialiseTooShortSortCode()
+        {
+            Assert.Throws<ArgumentException>(() => new BankAccountDetails("234","12345678"));
+        }
+        
+        [Test]
+        public void CannotInitialiseTooLongSortCode()
+        {
+            Assert.Throws<ArgumentException>(() => new BankAccountDetails("1234567","12345678"));
+        }
+        
+        [Test]
+        public void CannotInitialiseLetterAsASortCode()
+        {
+            Assert.Throws<ArgumentException>(() => new BankAccountDetails("a","12345678"));
         }
 
         [Test]
@@ -106,13 +116,11 @@ namespace ModulusCheckingTests.Models
         }
 
         [Test]
-        [TestCase("123455", "01234567", 3, 3)]
-        public void CanSetWeightMappingsException(string sc, string an, int desiredMappings, int expectedCount)
+        public void CannotSetIncorrectWeightMappings()
         {
-            Assert.Throws<InvalidOperationException>(() =>
+            Assert.Throws<InvalidOperationException>( () => new BankAccountDetails("123455", "01234567")
             {
-                var target = new BankAccountDetails(sc, an) { WeightMappings = BuildMappingList(sc, desiredMappings, ModulusExceptionFlag) };
-                var count = target.WeightMappings.Count();
+                WeightMappings = BuildMappingList("123455", 3, ModulusExceptionFlag)
             });
         }
 
@@ -146,14 +154,12 @@ namespace ModulusCheckingTests.Models
         }
 
         [Test]
-        [TestCase("123455", "01234567", 0, 0, false)]
-        public void CanIdentifyIfSecondCheckIsRequiredException(string sc, string an, int desiredMappings, int exception, bool expected)
+        public void CannotIdentifyIfSecondCheckRequiredWithZeroMappings()
         {
-            Assert.Throws<InvalidOperationException>(() =>
+            Assert.Throws<InvalidOperationException>(() => new BankAccountDetails("123455", "01234567")
             {
-                var target = new BankAccountDetails(sc, an) { WeightMappings = BuildMappingList(sc, desiredMappings, exception) };
-                var test = target.IsSecondCheckRequired();
-            });
+                WeightMappings = BuildMappingList("123455", 0, 0)
+            }.IsSecondCheckRequired());
         }
 
 

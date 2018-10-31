@@ -1,8 +1,8 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <PackageId>ModulusChecker.NetCore</PackageId>
-    <Version>1.9.0</Version>
+    <Version>2.5.0</Version>
     <Authors>Paul D'Ambra, Alexandru Munteanu</Authors>
     <Company>PaulDAmbra</Company>
     <Product>ModulusChecker</Product>
@@ -12,6 +12,8 @@
     <RepositoryUrl>https://github.com/aaxelm/ModulusChecker.NetCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>2.5.0.0</AssemblyVersion>
+    <FileVersion>2.5.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\valacdos.txt" />
