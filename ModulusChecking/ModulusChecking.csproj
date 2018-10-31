@@ -12,6 +12,8 @@
     <RepositoryUrl>https://github.com/aaxelm/ModulusChecker.NetCore</RepositoryUrl>
     <RepositoryType>GitHub</RepositoryType>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <AssemblyVersion>2.5.0.0</AssemblyVersion>
+    <FileVersion>2.5.0.0</FileVersion>
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Resources\valacdos.txt" />
